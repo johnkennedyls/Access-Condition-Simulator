@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultado de Acceso</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilos básicos para mejorar la presentación */
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .result { padding: 15px; margin-top: 20px; border-radius: 4px; }
+        /* Estilos condicionales según el resultado */
+        .success { background-color: #dff0d8; color: #3c763d; } /* Verde para acceso permitido */
+        .failure { background-color: #f2dede; color: #a94442; } /* Rojo para acceso denegado */
+        .links { margin-top: 20px; }
+    </style>
+</head>
+<body>
+<!-- Título de la página -->
+<h1>Resultado de Acceso</h1>
+
+<!-- Muestra las condiciones seleccionadas -->
+<h2>Condiciones:</h2>
+<ul>
+    <li>Es administrador: <span th:text="${condition.admin}">false</span></li>
+    <li>Clave correcta: <span th:text="${condition.correctPassword}">false</span></li>
+    <li>Acceso especial: <span th:text="${condition.specialAccess}">false</span></li>
+</ul>
+
+<!-- Bloque de resultado que cambia de estilo según el resultado -->
+<div class="result" th:class="${hasAccess} ? 'result success' : 'result failure'">
+    <h2 th:text="${hasAccess} ? 'Acceso permitido' : 'Acceso denegado'">Resultado</h2>
+    <p>La condición ((esAdmin && claveCorrecta) || accesoEspecial) = <span th:text="${hasAccess}">false</span></p>
+</div>
+
+<!-- Enlaces a otras páginas -->
+<div class="links">
+    <a th:href="@{/}">Volver al formulario</a>
+    <a th:href="@{/truth-table}">Ver tabla de verdad</a>
+</div>
+</body>
+</html>

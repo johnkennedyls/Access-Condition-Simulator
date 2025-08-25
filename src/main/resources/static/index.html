@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Simulator</title>
+</head>
+<body>
+    <h1>Access Simulator</h1>
+    <form id="accessForm">
+        <label for="admin">Is Admin:</label>
+        <input type="checkbox" id="admin" name="admin"><br><br>
+        <label for="correctPassword">Correct Password:</label>
+        <input type="checkbox" id="correctPassword" name="correctPassword"><br><br>
+        <label for="specialAccess">Special Access:</label>
+        <input type="checkbox" id="specialAccess" name="specialAccess"><br><br>
+        <button type="button" onclick="checkAccess()">Check Access</button>
+    </form>
+
+    <h2>Access Result: <span id="result"></span></h2>
+
+    <a href="/truth-table">View Truth Table</a>
+
+    <script>
+        async function checkAccess() {
+            const form = document.getElementById('accessForm');
+            const data = {
+                admin: form.admin.checked,
+                correctPassword: form.correctPassword.checked,
+                specialAccess: form.specialAccess.checked
+            };
+
+            const response = await fetch('/check-access', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>

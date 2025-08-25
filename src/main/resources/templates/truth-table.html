@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tabla de Verdad</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilos básicos para mejorar la presentación */
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        /* Estilo para la tabla */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 8px; text-align: center; border: 1px solid #ddd; }
+        th { background-color: #f2f2f2; } /* Encabezados en gris claro */
+        tr:nth-child(even) { background-color: #f9f9f9; } /* Filas alternadas */
+        .links { margin-top: 20px; }
+    </style>
+</head>
+<body>
+<!-- Título de la página -->
+<h1>Tabla de Verdad</h1>
+<p>Condición: ((esAdmin && claveCorrecta) || accesoEspecial)</p>
+
+<!-- Tabla con todas las combinaciones posibles -->
+<table>
+    <thead>
+    <tr>
+        <th>esAdmin</th>
+        <th>claveCorrecta</th>
+        <th>accesoEspecial</th>
+        <th>Resultado</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iteración sobre cada fila de datos -->
+    <tr th:each="row : ${rows}">
+        <td th:text="${row.admin}">true</td>
+        <td th:text="${row.correctPassword}">true</td>
+        <td th:text="${row.specialAccess}">true</td>
+        <td th:text="${row.result}">true</td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Enlaces a otras páginas -->
+<div class="links">
+    <a th:href="@{/}">Volver al formulario</a>
+</div>
+</body>
+</html>

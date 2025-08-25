@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Simulador de Condiciones de Acceso</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Estilos básicos para mejorar la presentación */
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        button { padding: 8px 16px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        .links { margin-top: 20px; }
+    </style>
+</head>
+<body>
+<!-- Título de la página -->
+<h1>Simulador de Condiciones de Acceso</h1>
+
+<!-- Formulario que envía datos al endpoint /check-access -->
+<form th:action="@{/check-access}" th:object="${accessCondition}" method="post">
+    <!-- Campo para la condición "es admin" -->
+    <div class="form-group">
+        <label>¿Es administrador?</label>
+        <input type="checkbox" th:field="*{admin}">
+    </div>
+
+    <!-- Campo para la condición "clave correcta" -->
+    <div class="form-group">
+        <label>¿Clave correcta?</label>
+        <input type="checkbox" th:field="*{correctPassword}">
+    </div>
+
+    <!-- Campo para la condición "acceso especial" -->
+    <div class="form-group">
+        <label>¿Acceso especial?</label>
+        <input type="checkbox" th:field="*{specialAccess}">
+    </div>
+
+    <!-- Botón para enviar el formulario -->
+    <button type="submit">Verificar acceso</button>
+</form>
+
+<!-- Enlaces a otras páginas -->
+<div class="links">
+    <a th:href="@{/truth-table}">Ver tabla de verdad</a>
+</div>
+</body>
+</html>
